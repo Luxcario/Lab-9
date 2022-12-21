@@ -1,5 +1,5 @@
-# Lab-9
-# lab09
+# Lab9
+
 
 Nama : Muhamad David Ali
 
@@ -55,12 +55,23 @@ else:
     print ("Written content in the file successfully")
 fh.close()
 ~~~
-![Screenshot (2)](https://user-images.githubusercontent.com/116184002/208795621-e7e9b524-4963-4585-b407-83de7aff4898.png)
+![Screenshot](https://user-images.githubusercontent.com/116184002/208798519-4118d0a7-4a59-481a-8175-bc750440ba3b.png)
+
 
 - Contoh ini mencoba membuka file yang Anda tidak memiliki izin menulis, sehingga membuat file pengecualian
 - Ketika kode di bawah dijalankan, menghasilkan hasil sebagai berikut:
+~~~
+#!/usr/bin/python
+try:
+    fh = open("testfile", "r")
+    fh.write("This is my test file for exception handling!!")
+except IOError:
+    print ("Error: can\'t find file or read data")
+else:
+    print ("Written content in the file successfully")
+~~~
+![Screenshot](https://user-images.githubusercontent.com/116184002/208798602-58486003-4798-409a-9864-225d1a364a53.png)
 
-![ss3](https://user-images.githubusercontent.com/115678171/208364589-8553d79c-8447-49b7-9fcd-2fc36c6d577a.png)
 
 ### Fasal kecuali tanpa Pengecualian
 - Anda juga dapat menggunakan pernyataan exception tanpa exception yang didefinisikan sebagai berikut:
@@ -91,26 +102,77 @@ If there is no exception then execute this block.
 ### Klausa coba-akhirnya
 #### Contoh
 - Jika Anda tidak memiliki izin untuk membuka file dalam mode tulis yang dapat ditulis, maka ini akan menghasilkan hasil berikut:
-![ss4](https://user-images.githubusercontent.com/115678171/208364641-aed38dfa-958b-49fe-b157-89565c837c80.png)
+~~~
+#!/usr/bin/python
+try:
+    fh = open("testfile", "w")
+    fh.write("This is my test file for exception handling!!")
+finally:
+    print ("Error: can\'t find file or read data")
+~~~
+![Screenshot](https://user-images.githubusercontent.com/116184002/208799139-719ce62b-45ca-4105-aeb3-a8d960a3916d.png)
+
 - Contoh yang sama dapat ditulis lebih bersih sebagai berikut:
-![ss5](https://user-images.githubusercontent.com/115678171/208364686-27038c3a-82a9-44ce-a586-cc6b82d8f205.png)
+~~~
+#!/usr/bin/python
+try:
+    fh = open("testfile", "r")
+    try:
+        fh.write("This is my test file for exception handling!!")
+    finally:
+        print ("Going to close the file")
+        fh.close()
+except IOError:
+    print("Error : can\'t find file or read data") 
+~~~
+![Screenshot](https://user-images.githubusercontent.com/116184002/208800290-febb7520-fc83-4612-9fed-208645c5629b.png)
+
 
 Ketika exception dilempar ke dalam blok try, eksekusi segera dilanjutkan ke akhir memblok. Setelah semua pernyataan di blok akhirnya dieksekusi, pengecualian dimunculkan lagi dan ditangani dalam pernyataan kecuali jika ada di lapisan berikutnya yang lebih tinggi dari percobaan-kecuali penyataan.
 ### Argumen Pengecualian
 #### Contoh
 - Berikut adalah contoh untuk satu pengecualian
 - Ketika kode di bawah dijalankan, menghasilkan hasil sebagai berikut:
-![ss6](https://user-images.githubusercontent.com/115678171/208364726-06debb11-beef-426b-96e6-e2f215fdc095.png)
+~~~
+# Define a function here.
+
+def temp_convert(var):
+    try:
+        return int(var)
+    except ValueError(Argument):
+        print("The argument does not contain numbers\n", Argument)
+# Call above function here.
+temp_convert("xyz")
+~~~
+![Screenshot](https://user-images.githubusercontent.com/116184002/208800986-a2f1616b-2ad0-4b5c-9e11-c2275723a3a0.png)
 
 ### Melempar Pengecualian
 #### Contoh
 - Pengecualian dapat berupa string, kelas, atau objek. Sebagian besar pengecualian adalah pengecualian dari inti Python menimbulkan adalah kelas, dengan argumen=argumen yang merupakan turunan dari kelas. Mendefinisikan pengecualian barucukup mudah dan dapat dilakukan sebagai berikut:
-![ss7](https://user-images.githubusercontent.com/115678171/208364773-ca5be91d-7c04-42b8-849b-56869bd9b90a.png)
+~~~
+def functionName( level ):
+    if level < 1:
+        raise("Invalid level!". level)
+        # The code below to thi would not be executed
+        # if we raise the exception
+~~~
+![Screenshot](https://user-images.githubusercontent.com/116184002/208801627-8e3d894b-7c4e-4ad0-a120-a1a4a6e660f3.png)
 
 ### Pengecualian yang Ditetapkan Pengguna
 - Python juga memungkinkan Anda membuat pengecualian sendiri dengan menurunkan kelas-kelas dari yang standar pengecualian bawaan.
 - Berikut adalah contoh-contoh yang terkait dengan RuntimeError. Di sini, kelas dibuat yang merupakan subkelas dari subkelas RuntimeError. Ini berguna saat Anda perlumenampilkan tampilan informasi yang lebih spesifik saat e pengecualian tertangkap.
 - Di blok coba, pengecualian yang ditentukan pengguna dimunculkan dan ditangkap di blok kecuali. Itu variabel e digunakan untuk membuat instance dari kelas Networkerror.
-![ss8](https://user-images.githubusercontent.com/115678171/208364817-5b812f7c-3006-4c35-ba2d-10521b51c5af.png)
+~~~
+class Networkerorr(RuntimeError):
+    def __init__ (self, arg):
+        self.args = arg
+try:
+    raise Networkerror("Bad hostname")
+except Networkerror(e):
+    print(e.args)
+~~~
+![Screenshot](https://user-images.githubusercontent.com/116184002/208802262-236a4759-d9d1-4561-b412-c8de6436dae9.png)
 
-### Sekian dari saya terima kasih :)
+
+
+### Sekian dari saya terima kasih........
